@@ -1,9 +1,21 @@
 import React from 'react';
+import {userService} from "@/services/api.service";
+import UserComponent from "@/components/UserComponent";
 
-const UsersPage = () => {
+const UsersPage = async () => {
+    let allUsers = await userService.getAllUsers();
+
+
     return (
         <div>
-            users page
+            <ul>
+
+                {
+                    allUsers.map((user: IUser) => (<li key={user.id}>
+                        <UserComponent user={user}/>
+                    </li>))
+                }
+            </ul>
         </div>
     );
 };
